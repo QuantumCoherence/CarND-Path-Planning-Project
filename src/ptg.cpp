@@ -1,0 +1,142 @@
+/*
+ * ptg.cpp
+ *
+ *  Created on: Jul 10, 2018
+ *      Author: paolo
+ */
+#include <vector>
+#include <iostream>
+#include <map>
+#include "Eigen-3.3/Eigen/Core"
+#include "Eigen-3.3/Eigen/QR"
+#include "cost_functions.h"
+#include "constants.h"
+
+
+using namespace std;
+using Eigen::MatrixXd;
+using Eigen::VectorXd;
+
+map<string,double> WEIGHTED_COST_FUNCTIONS = {
+    {"time_diff_cost",    1.0},
+    {"s_diff_cost",       1.0},
+    {"d_diff_cost",       1.0},
+    {"efficiency_cost",   1.0},
+    {"max_jerk_cost",     1.0},
+    {"total_jerk_cost",   1.0},
+    {"collision_cost",    1.0},
+    {"buffer_cost",       1.0},
+    {"max_accel_cost",    1.0},
+    {"total_accel_cost",  1.0},
+};
+
+vector<double> JMT(vector<double> start, vector<double> end, double T){
+    /*
+    Calculates Jerk Minimizing Trajectory for start, end and T.
+    */
+
+	MatrixXd A(3,3);
+    VectorXd b(3);
+	A(2,0) = 6*T;      A(1,0) = T*T;      A(2,1) = A(1,0)*12;
+	A(0,0) = A(1,0)*T; A(1,1) = A(0,0)*4; A(2,2) = A(0,0)*20;
+	A(0,1) = A(0,0)*T; A(1,2) = A(0,1)*5; A(0,2) = A(0,1)*T;
+	A(1,0) = A(1,0)*3;
+
+	b(0) = end[0] - start[0] - start[1]*T-0.5*start[2]*T*T;
+	b(1) = end[1] - start[1] - start[2]*T;
+	b(2) = end[2] - start[2];
+	VectorXd x = A.colPivHouseholderQr().solve(b);
+	//cout << start[0] << "," << start[1] << "," << 0.5*start[2] << "," <<  x <<endl;
+	return {start[0],start[1],0.5*start[2],x(0),x(1),x(2)};
+
+}
+
+/*
+import numpy as np
+import random
+
+
+def PTG(start_s, start_d, target_vehicle, delta, T, predictions):
+    """
+    Finds the best trajectory according to WEIGHTED_COST_FUNCTIONS (global).
+
+    arguments:
+     start_s - [s, s_dot, s_ddot]
+
+     start_d - [d, d_dot, d_ddot]
+
+     target_vehicle - id of leading vehicle (int) which can be used to retrieve
+       that vehicle from the "predictions" dictionary. This is the vehicle that
+       we are setting our trajectory relative to.
+
+     delta - a length 6 array indicating the offset we are aiming for between us
+       and the target_vehicle. So if at time 5 the target vehicle will be at
+       [100, 10, 0, 0, 0, 0] and delta is [-10, 0, 0, 4, 0, 0], then our goal
+       state for t = 5 will be [90, 10, 0, 4, 0, 0]. This would correspond to a
+       goal of "follow 10 meters behind and 4 meters to the right of target vehicle"
+
+     T - the desired time at which we will be at the goal (relative to now as t=0)
+
+     predictions - dictionary of {v_id : vehicle }. Each vehicle has a method
+       vehicle.state_in(time) which returns a length 6 array giving that vehicle's
+       expected [s, s_dot, s_ddot, d, d_dot, d_ddot] state at that time.
+
+    return:
+     (best_s, best_d, best_t) where best_s are the 6 coefficients representing s(t)
+     best_d gives coefficients for d(t) and best_t gives duration associated w/
+     this trajectory.
+    """
+    target = predictions[target_vehicle]
+    # generate alternative goals
+    all_goals = []
+    timestep = 0.5
+    t = T - 4 * timestep
+    while t <= T + 4 * timestep:
+        target_state = np.array(target.state_in(t)) + np.array(delta)
+        goal_s = target_state[:3]
+        goal_d = target_state[3:]
+        goals = [(goal_s, goal_d, t)]
+        for _ in range(N_SAMPLES):
+            perturbed = perturb_goal(goal_s, goal_d)
+            goals.append((perturbed[0], perturbed[1], t))
+        all_goals += goals
+        t += timestep
+
+    # find best trajectory
+    trajectories = []
+    for goal in all_goals:
+        s_goal, d_goal, t = goal
+        s_coefficients = JMT(start_s, s_goal, t)
+        d_coefficients = JMT(start_d, d_goal, t)
+        trajectories.append(tuple([s_coefficients, d_coefficients, t]))
+
+    best = min(trajectories, key=lambda tr: calculate_cost(tr, target_vehicle, delta, T, predictions, WEIGHTED_COST_FUNCTIONS))
+    calculate_cost(best, target_vehicle, delta, T, predictions, WEIGHTED_COST_FUNCTIONS, verbose=True)
+    return best
+
+
+def calculate_cost(trajectory, target_vehicle, delta, goal_t, predictions, cost_functions_with_weights, verbose=False):
+    cost = 0
+    for cf, weight in cost_functions_with_weights:
+        new_cost = weight * cf(trajectory, target_vehicle, delta, goal_t, predictions)
+        cost += new_cost
+        if verbose:
+            print("cost for {} is \t {}".format(cf.__name__, new_cost))
+    return cost
+
+def perturb_goal(goal_s, goal_d):
+    """
+    Returns a "perturbed" version of the goal.
+    """
+    new_s_goal = []
+    for mu, sig in zip(goal_s, SIGMA_S):
+        new_s_goal.append(random.gauss(mu, sig))
+
+    new_d_goal = []
+    for mu, sig in zip(goal_d, SIGMA_D):
+        new_d_goal.append(random.gauss(mu, sig))
+
+    return tuple([new_s_goal, new_d_goal])
+
+
+*/
