@@ -12,6 +12,7 @@
 #include "Eigen-3.3/Eigen/Core"
 #include "Eigen-3.3/Eigen/QR"
 #include "vehicle.h"
+#include "constants.h"
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -200,42 +201,6 @@ vector<double> differentiate(const vector<double> & coefficients){
         new_cos.push_back(i*coefficients[i]);
     }
     return new_cos;
-}
-
-
-double nearest_approach_to_any_vehicle(vector<vector<double>> traj, map<int,Vehicle> vehicles){
-    //
-    //Calculates the closest distance to any vehicle during a trajectory.
-    //
-
-    double closest = 999999;
-    for (auto const& v : vehicles){
-        double d = nearest_approach(traj,v.second);
-        if (d < closest){
-            closest = d;
-        }
-    }
-    return closest;
-}
-
-double nearest_approach(vector<vector<double>> traj, Vehicle vehicle){
-    double closest = 999999;
-    vector<double> s_= traj[0];
-    vector<double> d_= traj[1];
-    double T= traj[2][0];
-
-    double f(vector<double> c, double t);
-    for (int i=0;i<100;i++){
-        double t = double(i) / 100 * T;
-        double cur_s = f(s_, t); // s(t)
-        double cur_d = f(d_, t); // d(t)
-        vector<double> target_state = vehicle.state_in(t);
-        double dist = sqrt((cur_s-target_state[0])*(cur_s-target_state[0]) + (cur_d-target_state[3])*(cur_d-target_state[3]))
-        if (dist < closest){
-            closest = dist;
-        }
-    }
-    return closest;
 }
 
 

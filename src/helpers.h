@@ -45,5 +45,4 @@ double nearest_approach(vector<vector<double>> traj, Vehicle vehicle);
 vector<vector<double>> get_f_and_N_derivatives(vector<double> coeffs, int N=3);
 */
 vector<double> JMT(vector<double> start, vector<double> end, double T);
-
 #endif /* HELPERS_H_ */

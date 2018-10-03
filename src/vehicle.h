@@ -11,7 +11,8 @@ using namespace std;
 class Vehicle {
 public:
 
-  map<string, int> lane_direction = {{"PLCL", 1}, {"LCL", 1}, {"LCR", -1}, {"PLCR", -1}};
+  map<string, int> lane_direction = {{"PLCL", -1}, {"LCL", -1}, {"LCR", 1}, {"PLCR", 1}};
+
 
   struct collider{
 
@@ -22,7 +23,7 @@ public:
 
   int L = 1;
 
-  int preferred_buffer = 6; // impacts "keep lane" behavior.
+  int preferred_buffer = 12; // impacts "keep lane" behavior.
 
   int lane;
 
@@ -35,29 +36,32 @@ public:
   float vy;
   float yaw;
   float a;
-
+  string traj_type;
   float target_speed;
 
   int lanes_available;
 
   float max_acceleration;
 
-  int goal_lane;
+  int id;
 
   int goal_s;
   float dt;
-
+  bool in_range;
   string state;
+  float dist_to_ego;
 
   /**
   * Constructor
   */
   Vehicle();
   Vehicle(int lane, float s, float d, float x, float y, float v, float vx, float vy, float a, string state="CS");
-  Vehicle(float s, float d, float x, float y, float vx, float vy, string state="CS");
-  Vehicle(int egoid, float s, float d, float x, float y, float v, float yaw, string state="KL");
+  Vehicle(int lane, float s, float d, float x, float y, float vx, float vy, string state,  int id);
+  Vehicle(int lane, int egoid, float s, float d, float x, float y, float v, float yaw, string state="KL");
   Vehicle(int lane, float s, float v, float a, string state="CS");
-
+  Vehicle(int lane, float s, float d, float v, float a, string state="CS");
+  Vehicle(int lane, float s, float v, float a, string state, string traj_type);
+  Vehicle(int lane, float s, float v, float a,  float dist_2_ego, float x, float y, float vx, float vy, int id, string state);
 
   /**
   * Destructor
@@ -87,11 +91,9 @@ public:
 
   bool get_vehicle_ahead(map<int, vector<Vehicle>> predictions, int lane, Vehicle & rVehicle);
 
-  vector<Vehicle> generate_predictions(int horizon=2);
-
+  vector<Vehicle> generate_predictions(int horizon=5);
   void realize_next_state(vector<Vehicle> trajectory);
-
-  void configure(vector<float> road_data);
+    void configure(vector<float> road_data);
 
 };
 
