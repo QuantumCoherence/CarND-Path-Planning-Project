@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "constants.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
 
   int L = 1;
 
-  int preferred_buffer = 12; // impacts "keep lane" behavior.
+  int preferred_buffer = KL_BUFFER; // impacts "keep lane" behavior.
 
   int lane;
 
@@ -32,6 +33,8 @@ public:
   float x;
   float y;
   float v;
+  int mv_i;
+  vector<float> v_buf;
   float vx;
   float vy;
   float yaw;
@@ -55,13 +58,13 @@ public:
   * Constructor
   */
   Vehicle();
-  Vehicle(int lane, float s, float d, float x, float y, float v, float vx, float vy, float a, string state="CS");
-  Vehicle(int lane, float s, float d, float x, float y, float vx, float vy, string state,  int id);
-  Vehicle(int lane, int egoid, float s, float d, float x, float y, float v, float yaw, string state="KL");
-  Vehicle(int lane, float s, float v, float a, string state="CS");
-  Vehicle(int lane, float s, float d, float v, float a, string state="CS");
-  Vehicle(int lane, float s, float v, float a, string state, string traj_type);
-  Vehicle(int lane, float s, float v, float a,  float dist_2_ego, float x, float y, float vx, float vy, int id, string state);
+  Vehicle(float v);
+  Vehicle(int lane, float s, float d, float x, float y, float vx, float vy, string state,  int id);//#2 1
+  Vehicle(int lane, int egoid, float s, float d, float x, float y, float v, float yaw, string state="KL");//#3 1
+  Vehicle(int lane, float s, float d, float v, float a, string state="CS"); //#5 4
+  Vehicle(int lane, float s, float d, float v, float a, int id, string state="CS");//#6 1
+  Vehicle(int lane, float s, float v, float a, string state, string traj_type);//#8 4
+
 
   /**
   * Destructor
@@ -90,6 +93,7 @@ public:
   bool get_vehicle_behind(map<int, vector<Vehicle>> predictions, int lane, Vehicle & rVehicle);
 
   bool get_vehicle_ahead(map<int, vector<Vehicle>> predictions, int lane, Vehicle & rVehicle);
+  void speedUpdate(float v);
 
   vector<Vehicle> generate_predictions(int horizon=5);
   void realize_next_state(vector<Vehicle> trajectory);

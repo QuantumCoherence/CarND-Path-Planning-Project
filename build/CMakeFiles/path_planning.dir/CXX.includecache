@@ -809,6 +809,8 @@ math.h
 -
 iostream
 -
+iomanip
+-
 vector
 -
 map
@@ -981,6 +983,8 @@ cost.h
 /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.h
 constants.h
 /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/constants.h
+helpers.h
+/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.h
 
 /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.h
 iostream
@@ -993,4 +997,6 @@ map
 -
 string
 -
+constants.h
+/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/constants.h
 

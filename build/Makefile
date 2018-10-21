@@ -48,7 +48,7 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src
+CMAKE_SOURCE_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build
@@ -123,113 +123,113 @@ path_planning/fast:
 	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/build
 .PHONY : path_planning/fast
 
-cost.o: cost.cpp.o
+src/cost.o: src/cost.cpp.o
 
-.PHONY : cost.o
-
-# target to build an object file
-cost.cpp.o:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/cost.cpp.o
-.PHONY : cost.cpp.o
-
-cost.i: cost.cpp.i
-
-.PHONY : cost.i
-
-# target to preprocess a source file
-cost.cpp.i:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/cost.cpp.i
-.PHONY : cost.cpp.i
-
-cost.s: cost.cpp.s
-
-.PHONY : cost.s
-
-# target to generate assembly for a file
-cost.cpp.s:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/cost.cpp.s
-.PHONY : cost.cpp.s
-
-helpers.o: helpers.cpp.o
-
-.PHONY : helpers.o
+.PHONY : src/cost.o
 
 # target to build an object file
-helpers.cpp.o:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/helpers.cpp.o
-.PHONY : helpers.cpp.o
+src/cost.cpp.o:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/cost.cpp.o
+.PHONY : src/cost.cpp.o
 
-helpers.i: helpers.cpp.i
+src/cost.i: src/cost.cpp.i
 
-.PHONY : helpers.i
+.PHONY : src/cost.i
 
 # target to preprocess a source file
-helpers.cpp.i:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/helpers.cpp.i
-.PHONY : helpers.cpp.i
+src/cost.cpp.i:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/cost.cpp.i
+.PHONY : src/cost.cpp.i
 
-helpers.s: helpers.cpp.s
+src/cost.s: src/cost.cpp.s
 
-.PHONY : helpers.s
+.PHONY : src/cost.s
 
 # target to generate assembly for a file
-helpers.cpp.s:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/helpers.cpp.s
-.PHONY : helpers.cpp.s
+src/cost.cpp.s:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/cost.cpp.s
+.PHONY : src/cost.cpp.s
 
-main.o: main.cpp.o
+src/helpers.o: src/helpers.cpp.o
 
-.PHONY : main.o
+.PHONY : src/helpers.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/helpers.cpp.o:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/helpers.cpp.o
+.PHONY : src/helpers.cpp.o
 
-main.i: main.cpp.i
+src/helpers.i: src/helpers.cpp.i
 
-.PHONY : main.i
+.PHONY : src/helpers.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/helpers.cpp.i:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/helpers.cpp.i
+.PHONY : src/helpers.cpp.i
 
-main.s: main.cpp.s
+src/helpers.s: src/helpers.cpp.s
 
-.PHONY : main.s
+.PHONY : src/helpers.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/helpers.cpp.s:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/helpers.cpp.s
+.PHONY : src/helpers.cpp.s
 
-vehicle.o: vehicle.cpp.o
+src/main.o: src/main.cpp.o
 
-.PHONY : vehicle.o
+.PHONY : src/main.o
 
 # target to build an object file
-vehicle.cpp.o:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/vehicle.cpp.o
-.PHONY : vehicle.cpp.o
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
 
-vehicle.i: vehicle.cpp.i
+src/main.i: src/main.cpp.i
 
-.PHONY : vehicle.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-vehicle.cpp.i:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/vehicle.cpp.i
-.PHONY : vehicle.cpp.i
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-vehicle.s: vehicle.cpp.s
+src/main.s: src/main.cpp.s
 
-.PHONY : vehicle.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-vehicle.cpp.s:
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/vehicle.cpp.s
-.PHONY : vehicle.cpp.s
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/vehicle.o: src/vehicle.cpp.o
+
+.PHONY : src/vehicle.o
+
+# target to build an object file
+src/vehicle.cpp.o:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/vehicle.cpp.o
+.PHONY : src/vehicle.cpp.o
+
+src/vehicle.i: src/vehicle.cpp.i
+
+.PHONY : src/vehicle.i
+
+# target to preprocess a source file
+src/vehicle.cpp.i:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/vehicle.cpp.i
+.PHONY : src/vehicle.cpp.i
+
+src/vehicle.s: src/vehicle.cpp.s
+
+.PHONY : src/vehicle.s
+
+# target to generate assembly for a file
+src/vehicle.cpp.s:
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/vehicle.cpp.s
+.PHONY : src/vehicle.cpp.s
 
 # Help Target
 help:
@@ -240,18 +240,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... path_planning"
-	@echo "... cost.o"
-	@echo "... cost.i"
-	@echo "... cost.s"
-	@echo "... helpers.o"
-	@echo "... helpers.i"
-	@echo "... helpers.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... vehicle.o"
-	@echo "... vehicle.i"
-	@echo "... vehicle.s"
+	@echo "... src/cost.o"
+	@echo "... src/cost.i"
+	@echo "... src/cost.s"
+	@echo "... src/helpers.o"
+	@echo "... src/helpers.i"
+	@echo "... src/helpers.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/vehicle.o"
+	@echo "... src/vehicle.i"
+	@echo "... src/vehicle.s"
 .PHONY : help
 
 

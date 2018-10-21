@@ -43,7 +43,7 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src
+CMAKE_SOURCE_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build
@@ -57,116 +57,116 @@ include CMakeFiles/path_planning.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/path_planning.dir/flags.make
 
-CMakeFiles/path_planning.dir/vehicle.cpp.o: CMakeFiles/path_planning.dir/flags.make
-CMakeFiles/path_planning.dir/vehicle.cpp.o: /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/path_planning.dir/vehicle.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/vehicle.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp
+CMakeFiles/path_planning.dir/src/main.cpp.o: CMakeFiles/path_planning.dir/flags.make
+CMakeFiles/path_planning.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/path_planning.dir/src/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/src/main.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp
 
-CMakeFiles/path_planning.dir/vehicle.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/vehicle.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp > CMakeFiles/path_planning.dir/vehicle.cpp.i
+CMakeFiles/path_planning.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/src/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp > CMakeFiles/path_planning.dir/src/main.cpp.i
 
-CMakeFiles/path_planning.dir/vehicle.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/vehicle.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp -o CMakeFiles/path_planning.dir/vehicle.cpp.s
+CMakeFiles/path_planning.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/src/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp -o CMakeFiles/path_planning.dir/src/main.cpp.s
 
-CMakeFiles/path_planning.dir/vehicle.cpp.o.requires:
+CMakeFiles/path_planning.dir/src/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/path_planning.dir/vehicle.cpp.o.requires
+.PHONY : CMakeFiles/path_planning.dir/src/main.cpp.o.requires
 
-CMakeFiles/path_planning.dir/vehicle.cpp.o.provides: CMakeFiles/path_planning.dir/vehicle.cpp.o.requires
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/vehicle.cpp.o.provides.build
-.PHONY : CMakeFiles/path_planning.dir/vehicle.cpp.o.provides
+CMakeFiles/path_planning.dir/src/main.cpp.o.provides: CMakeFiles/path_planning.dir/src/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/main.cpp.o.provides.build
+.PHONY : CMakeFiles/path_planning.dir/src/main.cpp.o.provides
 
-CMakeFiles/path_planning.dir/vehicle.cpp.o.provides.build: CMakeFiles/path_planning.dir/vehicle.cpp.o
-
-
-CMakeFiles/path_planning.dir/cost.cpp.o: CMakeFiles/path_planning.dir/flags.make
-CMakeFiles/path_planning.dir/cost.cpp.o: /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/path_planning.dir/cost.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/cost.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp
-
-CMakeFiles/path_planning.dir/cost.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/cost.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp > CMakeFiles/path_planning.dir/cost.cpp.i
-
-CMakeFiles/path_planning.dir/cost.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/cost.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp -o CMakeFiles/path_planning.dir/cost.cpp.s
-
-CMakeFiles/path_planning.dir/cost.cpp.o.requires:
-
-.PHONY : CMakeFiles/path_planning.dir/cost.cpp.o.requires
-
-CMakeFiles/path_planning.dir/cost.cpp.o.provides: CMakeFiles/path_planning.dir/cost.cpp.o.requires
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/cost.cpp.o.provides.build
-.PHONY : CMakeFiles/path_planning.dir/cost.cpp.o.provides
-
-CMakeFiles/path_planning.dir/cost.cpp.o.provides.build: CMakeFiles/path_planning.dir/cost.cpp.o
+CMakeFiles/path_planning.dir/src/main.cpp.o.provides.build: CMakeFiles/path_planning.dir/src/main.cpp.o
 
 
-CMakeFiles/path_planning.dir/helpers.cpp.o: CMakeFiles/path_planning.dir/flags.make
-CMakeFiles/path_planning.dir/helpers.cpp.o: /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/path_planning.dir/helpers.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/helpers.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp
+CMakeFiles/path_planning.dir/src/cost.cpp.o: CMakeFiles/path_planning.dir/flags.make
+CMakeFiles/path_planning.dir/src/cost.cpp.o: ../src/cost.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/path_planning.dir/src/cost.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/src/cost.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp
 
-CMakeFiles/path_planning.dir/helpers.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/helpers.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp > CMakeFiles/path_planning.dir/helpers.cpp.i
+CMakeFiles/path_planning.dir/src/cost.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/src/cost.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp > CMakeFiles/path_planning.dir/src/cost.cpp.i
 
-CMakeFiles/path_planning.dir/helpers.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/helpers.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp -o CMakeFiles/path_planning.dir/helpers.cpp.s
+CMakeFiles/path_planning.dir/src/cost.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/src/cost.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/cost.cpp -o CMakeFiles/path_planning.dir/src/cost.cpp.s
 
-CMakeFiles/path_planning.dir/helpers.cpp.o.requires:
+CMakeFiles/path_planning.dir/src/cost.cpp.o.requires:
 
-.PHONY : CMakeFiles/path_planning.dir/helpers.cpp.o.requires
+.PHONY : CMakeFiles/path_planning.dir/src/cost.cpp.o.requires
 
-CMakeFiles/path_planning.dir/helpers.cpp.o.provides: CMakeFiles/path_planning.dir/helpers.cpp.o.requires
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/helpers.cpp.o.provides.build
-.PHONY : CMakeFiles/path_planning.dir/helpers.cpp.o.provides
+CMakeFiles/path_planning.dir/src/cost.cpp.o.provides: CMakeFiles/path_planning.dir/src/cost.cpp.o.requires
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/cost.cpp.o.provides.build
+.PHONY : CMakeFiles/path_planning.dir/src/cost.cpp.o.provides
 
-CMakeFiles/path_planning.dir/helpers.cpp.o.provides.build: CMakeFiles/path_planning.dir/helpers.cpp.o
+CMakeFiles/path_planning.dir/src/cost.cpp.o.provides.build: CMakeFiles/path_planning.dir/src/cost.cpp.o
 
 
-CMakeFiles/path_planning.dir/main.cpp.o: CMakeFiles/path_planning.dir/flags.make
-CMakeFiles/path_planning.dir/main.cpp.o: /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/path_planning.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/main.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp
+CMakeFiles/path_planning.dir/src/helpers.cpp.o: CMakeFiles/path_planning.dir/flags.make
+CMakeFiles/path_planning.dir/src/helpers.cpp.o: ../src/helpers.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/path_planning.dir/src/helpers.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/src/helpers.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp
 
-CMakeFiles/path_planning.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp > CMakeFiles/path_planning.dir/main.cpp.i
+CMakeFiles/path_planning.dir/src/helpers.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/src/helpers.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp > CMakeFiles/path_planning.dir/src/helpers.cpp.i
 
-CMakeFiles/path_planning.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/main.cpp -o CMakeFiles/path_planning.dir/main.cpp.s
+CMakeFiles/path_planning.dir/src/helpers.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/src/helpers.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/helpers.cpp -o CMakeFiles/path_planning.dir/src/helpers.cpp.s
 
-CMakeFiles/path_planning.dir/main.cpp.o.requires:
+CMakeFiles/path_planning.dir/src/helpers.cpp.o.requires:
 
-.PHONY : CMakeFiles/path_planning.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/path_planning.dir/src/helpers.cpp.o.requires
 
-CMakeFiles/path_planning.dir/main.cpp.o.provides: CMakeFiles/path_planning.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/path_planning.dir/main.cpp.o.provides
+CMakeFiles/path_planning.dir/src/helpers.cpp.o.provides: CMakeFiles/path_planning.dir/src/helpers.cpp.o.requires
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/helpers.cpp.o.provides.build
+.PHONY : CMakeFiles/path_planning.dir/src/helpers.cpp.o.provides
 
-CMakeFiles/path_planning.dir/main.cpp.o.provides.build: CMakeFiles/path_planning.dir/main.cpp.o
+CMakeFiles/path_planning.dir/src/helpers.cpp.o.provides.build: CMakeFiles/path_planning.dir/src/helpers.cpp.o
+
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.o: CMakeFiles/path_planning.dir/flags.make
+CMakeFiles/path_planning.dir/src/vehicle.cpp.o: ../src/vehicle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/path_planning.dir/src/vehicle.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/path_planning.dir/src/vehicle.cpp.o -c /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/path_planning.dir/src/vehicle.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp > CMakeFiles/path_planning.dir/src/vehicle.cpp.i
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/path_planning.dir/src/vehicle.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src/vehicle.cpp -o CMakeFiles/path_planning.dir/src/vehicle.cpp.s
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.o.requires:
+
+.PHONY : CMakeFiles/path_planning.dir/src/vehicle.cpp.o.requires
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.o.provides: CMakeFiles/path_planning.dir/src/vehicle.cpp.o.requires
+	$(MAKE) -f CMakeFiles/path_planning.dir/build.make CMakeFiles/path_planning.dir/src/vehicle.cpp.o.provides.build
+.PHONY : CMakeFiles/path_planning.dir/src/vehicle.cpp.o.provides
+
+CMakeFiles/path_planning.dir/src/vehicle.cpp.o.provides.build: CMakeFiles/path_planning.dir/src/vehicle.cpp.o
 
 
 # Object files for target path_planning
 path_planning_OBJECTS = \
-"CMakeFiles/path_planning.dir/vehicle.cpp.o" \
-"CMakeFiles/path_planning.dir/cost.cpp.o" \
-"CMakeFiles/path_planning.dir/helpers.cpp.o" \
-"CMakeFiles/path_planning.dir/main.cpp.o"
+"CMakeFiles/path_planning.dir/src/main.cpp.o" \
+"CMakeFiles/path_planning.dir/src/cost.cpp.o" \
+"CMakeFiles/path_planning.dir/src/helpers.cpp.o" \
+"CMakeFiles/path_planning.dir/src/vehicle.cpp.o"
 
 # External object files for target path_planning
 path_planning_EXTERNAL_OBJECTS =
 
-path_planning: CMakeFiles/path_planning.dir/vehicle.cpp.o
-path_planning: CMakeFiles/path_planning.dir/cost.cpp.o
-path_planning: CMakeFiles/path_planning.dir/helpers.cpp.o
-path_planning: CMakeFiles/path_planning.dir/main.cpp.o
+path_planning: CMakeFiles/path_planning.dir/src/main.cpp.o
+path_planning: CMakeFiles/path_planning.dir/src/cost.cpp.o
+path_planning: CMakeFiles/path_planning.dir/src/helpers.cpp.o
+path_planning: CMakeFiles/path_planning.dir/src/vehicle.cpp.o
 path_planning: CMakeFiles/path_planning.dir/build.make
 path_planning: CMakeFiles/path_planning.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable path_planning"
@@ -177,10 +177,10 @@ CMakeFiles/path_planning.dir/build: path_planning
 
 .PHONY : CMakeFiles/path_planning.dir/build
 
-CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/vehicle.cpp.o.requires
-CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/cost.cpp.o.requires
-CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/helpers.cpp.o.requires
-CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/main.cpp.o.requires
+CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/src/main.cpp.o.requires
+CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/src/cost.cpp.o.requires
+CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/src/helpers.cpp.o.requires
+CMakeFiles/path_planning.dir/requires: CMakeFiles/path_planning.dir/src/vehicle.cpp.o.requires
 
 .PHONY : CMakeFiles/path_planning.dir/requires
 
@@ -189,6 +189,6 @@ CMakeFiles/path_planning.dir/clean:
 .PHONY : CMakeFiles/path_planning.dir/clean
 
 CMakeFiles/path_planning.dir/depend:
-	cd /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/src /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles/path_planning.dir/DependInfo.cmake --color=$(COLOR)
+	cd /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build /media/paolo/VERSIONED-BOX/EDX-Courses/Enrolled/Self-Driving-Nanodegree-Udacity/CarND-Path-Planning-Project/build/CMakeFiles/path_planning.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/path_planning.dir/depend
 

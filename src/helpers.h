@@ -36,13 +36,8 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 double f(vector<double> c, double t);
 
 double logistic(double x);
+void print_trajectory(vector<Vehicle> trajectory);
 
-/*vector<double> differentiate(const vector<double> & coefficients);
 
-double nearest_approach_to_any_vehicle(vector<vector<double>> traj, map<int,Vehicle> vehicles);
-double nearest_approach(vector<vector<double>> traj, Vehicle vehicle);
-
-vector<vector<double>> get_f_and_N_derivatives(vector<double> coeffs, int N=3);
-*/
 vector<double> JMT(vector<double> start, vector<double> end, double T);
 #endif /* HELPERS_H_ */

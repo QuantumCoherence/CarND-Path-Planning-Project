@@ -7,6 +7,7 @@
 #include <fstream>
 #include <math.h>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <map>
 #include "Eigen-3.3/Eigen/Core"
@@ -23,6 +24,28 @@ using Eigen::VectorXd;
 constexpr double pi() { return M_PI; }
 double deg2rad(double x) { return x * pi() / 180; }
 double rad2deg(double x) { return x * 180 / pi(); }
+
+void print_trajectory(vector<Vehicle> trajectory) {
+	if (trajectory.size() !=0) {
+		Vehicle* v;
+		cout << "\t"   << setw(12) << "id\t" << setw(12) << "lane\t" << setw(12) << "s\t" << setw(12) << "d\t" << setw(12) << "v\t"<< setw(12)
+			 <<	"vx\t" << setw(12) << "vy\t" << setw(12) << "x\t"    << setw(12) << "y\t" << setw(12) << "a\t"   << setw(12)
+			 << "State" << endl;
+		cout <<"Start ";
+		v= &trajectory[0];
+		std::cout << "\t" << setw(12) <<  0   << "\t" << setw(12) << v->lane << "\t" << setw(12) << v->s  << "\t" << setw(12) << v->d
+				  << "\t" << setw(12) << v->v*2.24 << "\t" << setw(12) << v->vx*2.24   << "\t" << setw(12) << v->vy*2.24  << "\t" << setw(12) << v->x
+				  << "\t" << setw(12) << v->y << "\t" << setw(12) << v->a    << "\t" << setw(12) << rad2deg(v->yaw) << "\t" << setw(12) << v->state << endl;
+		cout <<"End ";
+		v= &trajectory[1];
+		std::cout << "\t" << setw(12) << 1    << "\t" << setw(12) << v->lane << "\t" << setw(12) << v->s  << "\t" << setw(12) << v->d
+				  << "\t" << setw(12) << v->v*2.24 << "\t" << setw(12) << v->vx*2.24   << "\t" << setw(12) << v->vy*2.24  << "\t" << setw(12) << v->x
+				  << "\t" << setw(12) << v->y << "\t" << setw(12) << v->a    << "\t" << setw(12) << rad2deg(v->yaw) << "\t" << setw(12) << v->state << endl;
+		cout << endl;
+	} else {
+		cout << "Empty best trajectory " << endl;
+	}
+}
 
 
 
@@ -154,25 +177,6 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 	return {x,y};
 
 }
-/*typedef double (*traj_f)(double);
-
-traj_f to_equation(vector<double> coefficients){
-    //
-    //Takes the coefficients of a polynomial and creates a function of
-    //time from them.
-    //
-	traj_f f;
-    /*double fr(double t){
-    	double total = 0.0;
-        for (int i=0; i<coefficients;i++){//, c in enumerate(coefficients):
-            total += coefficients[i] * pow(t,i);
-        }
-        return total;
-    };
-    f = fr;
-    return f;
-}
-*/
 double f(vector<double> c, double t){
 
 	return c[0] + c[1] * t + c[2] * t*t + c[3] * t*t*t + c[4] * t*t*t*t + c[5] * t*t*t*t*t;
@@ -189,31 +193,6 @@ double logistic(double x){
     return 2.0 / (1 + exp(-x)) - 1.0;
 }
 
-/*
-vector<double> differentiate(const vector<double> & coefficients){
-	//
-	//  Calculates the derivative of a polynomial and returns
-    //	the corresponding coefficients.
-    //
-
-    vector<double> new_cos;
-    for (int i=1; i<coefficients.size();i++){
-        new_cos.push_back(i*coefficients[i]);
-    }
-    return new_cos;
-}
-
-
-vector<vector<double>> get_f_and_N_derivatives(vector<double> coeffs, int N=3){
-	vector<vector<double>> functions;
-	functions.push_back(coeffs);
-    for (int i=0; i<N;i++){
-        coeffs = differentiate(coeffs);
-        functions.push_back((coeffs));
-    }
-    return functions;
-}
-*/
 vector<double> JMT(vector<double> start, vector<double> end, double T){
     /*
     Calculates Jerk Minimizing Trajectory for start, end and T.

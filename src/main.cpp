@@ -27,6 +27,7 @@ using json = nlohmann::json;
 static map<int, Vehicle> vehicles;
 static float dt;
 static Vehicle ego;
+static Vehicle newvf = Vehicle(0);
 static int lane =1;
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
@@ -100,63 +101,45 @@ void printit(int i) {
 			  << "\t" << setw(12) << v->y << "\t" << setw(12) << v->a    << "\t" << setw(12) << rad2deg(v->yaw) << "\t" << setw(12) << v->state << endl;
 
 }
-void print_trajectory(vector<Vehicle> trajectory) {
-	if (trajectory.size() !=0) {
-		Vehicle* v;
-		cout << "\t"   << setw(12) << "id\t" << setw(12) << "lane\t" << setw(12) << "s\t" << setw(12) << "d\t" << setw(12) << "v\t"<< setw(12)
-			 <<	"vx\t" << setw(12) << "vy\t" << setw(12) << "x\t"    << setw(12) << "y\t" << setw(12) << "a\t"   << setw(12)
-			 << "State" << endl;
-		cout <<"Start ";
-		v= &trajectory[0];
-		std::cout << "\t" << setw(12) <<  0   << "\t" << setw(12) << v->lane << "\t" << setw(12) << v->s  << "\t" << setw(12) << v->d
-				  << "\t" << setw(12) << v->v*2.24 << "\t" << setw(12) << v->vx*2.24   << "\t" << setw(12) << v->vy*2.24  << "\t" << setw(12) << v->x
-				  << "\t" << setw(12) << v->y << "\t" << setw(12) << v->a    << "\t" << setw(12) << rad2deg(v->yaw) << "\t" << setw(12) << v->state << endl;
-		cout <<"End ";
-		v= &trajectory[1];
-		std::cout << "\t" << setw(12) << 1    << "\t" << setw(12) << v->lane << "\t" << setw(12) << v->s  << "\t" << setw(12) << v->d
-				  << "\t" << setw(12) << v->v*2.24 << "\t" << setw(12) << v->vx*2.24   << "\t" << setw(12) << v->vy*2.24  << "\t" << setw(12) << v->x
-				  << "\t" << setw(12) << v->y << "\t" << setw(12) << v->a    << "\t" << setw(12) << rad2deg(v->yaw) << "\t" << setw(12) << v->state << endl;
-		cout << endl;
-	} else {
-		cout << "Empty best trajectory " << endl;
-	}
-}
-
 
 void update_vehicle(int id, float s, float d, float x, float y, float vx, float vy,float dt) {
 
 	Vehicle* vehicle = &vehicles[id];
 	vehicle->lane =  (d/4);
 	vehicle->s = s;
-	float newv= sqrt(vx*vx+vy*vy);
-	vehicle->a = (newv-vehicle->v)/dt;
+	float newv= sqrt(vx*vx+vy*vy);// [m/s]
+	vehicle->a = (newv-vehicle->v)/dt;// in [m/s2]
 	vehicle->yaw = atan2(vy,vx);
-	vehicle->v= newv;
+	vehicle->speedUpdate(newv);// in [m/s]
 	vehicle->d = d;
 	vehicle->x = x;
 	vehicle->y = y;
-	vehicle->vx = vx;
-	vehicle->vy = vy;
+	vehicle->vx = vx;// in [m/s]
+	vehicle->vy = vy;// in [m/s]
 	int dot_sign = vx*(x-ego.x)+vy*(y-ego.y)<0.0? -1: 1;
 	vehicle->dist_to_ego = distance(ego.x,ego.y,x,y)*dot_sign;
-	vehicle->in_range = (vehicle->dist_to_ego <= in_range_dist && vehicle->dist_to_ego > -in_range_dist/2);
+	vehicle->in_range = (vehicle->dist_to_ego <= in_range_dist && ((vehicle->dist_to_ego > -in_range_dist/4 && vehicle->v<ego.v) || (vehicle->dist_to_ego > -in_range_dist/3)));
+	vehicle->dt = dt;
 
 }
 
-void update_ego(float s, float d, float x, float y, float yaw, float v,float dt) {
+void update_ego(float s, float d, float x, float y, float yaw, float v,float dt) {//v is expected to be given  in [m/s]
 
 	ego.s = s;
-	ego.a = (v-ego.v)/dt;
-	ego.v = v;
+	float prev_v = ego.v;
+	ego.speedUpdate(v);// in [m/s]
+	ego.a = (prev_v-ego.v)/dt; // in [m/s2]
 	ego.d = d;
 	ego.x = x;
 	ego.y = y;
-	ego.vx = v*cos(yaw);
-	ego.vy = v*sin(yaw);
+	ego.vx = v*cos(yaw);// in [m/s]
+	ego.vy = v*sin(yaw); // in [m/s]
 	ego.yaw = yaw;
 	ego.goal_s = s +1000;
 	ego.lane =lane;
+	ego.dt = dt;
 }
+
 
 vector<Vehicle> next_trajectory() {
 	map<int ,vector<Vehicle> > predictions;
@@ -278,17 +261,16 @@ int main() {
           	//	run path trajectory planner state machine
           	//
           	if (!done){//add vehicles
-          	    ego = Vehicle((car_d/4),EGO_ID,car_s,car_d,car_x,car_y,car_speed/2.24, deg2rad(car_yaw),"KL");
-          	    ego.configure({ref_vel/2.24,3,10000,10});
+          	    ego = Vehicle((car_d/4),EGO_ID,car_s,car_d,car_x,car_y,car_speed/2.24, deg2rad(car_yaw),"KL"); //#3
+          	    ego.configure({ref_vel/2.24,3,10000,9.9});
           	    //printego();
           	    //traffic
           		for(int i=0;i<sensor_fusion.size();i++){
           			//Vehicle(int lane, float s, float d, float x, float y, float vx, float vy, string state){
           			//                               lane from d,                     vehic_s,           vehic_d,              vehic_x,          vehic_y,           vehic_vx,             vehic_vy,          state
-           			Vehicle vehicle = Vehicle((int)(sensor_fusion[i][6]/4), sensor_fusion[i][5], sensor_fusion[i][6], sensor_fusion[i][1], sensor_fusion[i][2], sensor_fusion[i][3], sensor_fusion[i][4], "CS", i);
+           			Vehicle vehicle = Vehicle((int)(sensor_fusion[i][6]/4), sensor_fusion[i][5], sensor_fusion[i][6], sensor_fusion[i][1], sensor_fusion[i][2], sensor_fusion[i][3], sensor_fusion[i][4], "CS", i);//#2
           			vehicles.insert(std::pair<int,Vehicle>(i,vehicle));
            		}
-          		//printvehicles();
           		done = true;
           	} else {
           		// estimate cycle time of last loop
@@ -299,15 +281,25 @@ int main() {
           		}  else {
           			dt = 0.02 *(last_size-prev_size);
           		}
+#if DEBUG
               	cout << ">>>>>>>>>>>>>>>>>dt "<< dt << endl;
-          		update_ego(car_s,car_d,car_x,car_y, deg2rad(car_yaw), car_speed/2.24, dt);
+#endif
+          		update_ego(car_s,car_d,car_x,car_y, deg2rad(car_yaw), car_speed*MPHTOMS, dt); //v is converted from MPH to [m/s]
+#if DEBUG
           		printego();
+#endif
           		for(int i=0;i<sensor_fusion.size();i++){
-          			//void update_vehicle(int id, float s, float d, float x, float y, float vx, float vy,float dt) {
-          			//            id, vehic_s,                vehic_d,                vehic_x,          vehic_y,           vehic_vx,             vehic_vy
+          			//void update_vehicle(int id, float s, float d, float x, float y, float vx in [m/s], float vy in [m/s],float dt) {
+          			//            id, vehic_s,                vehic_d,                vehic_x,          vehic_y,           vehic_vxin [m/s],         vehic_vy in [m/s]
           			update_vehicle(i, sensor_fusion[i][5], sensor_fusion[i][6], sensor_fusion[i][1], sensor_fusion[i][2], sensor_fusion[i][3], sensor_fusion[i][4], dt);
           		}
+#if DEBUG
+          		printvehicles();
+#endif
           		best_trajectory = next_trajectory();
+#if DEBUG
+          		print_trajectory(best_trajectory);
+#endif
           		if (best_trajectory.size() !=0) {
           			lane = best_trajectory[1].lane;
           		}
@@ -316,10 +308,9 @@ int main() {
 
           	    elapsed = (finish.tv_sec - start.tv_sec);
           	    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+#if DEBUG
           	    cout << "Elapsed time " << elapsed << endl;
-          		printvehicles();
-
-          		print_trajectory(best_trajectory);
+#endif
           	}
           	//
           	// end trajectory planner FSM
@@ -330,28 +321,23 @@ int main() {
 			// new s/d/v/a  from trajectory  planner FSM
 			//
 			double newsf;
-			double newvf;
 			double newaf;
 			double newlane;
 			double newdf;
-			double interval;
           	if(best_trajectory.size()!=0) {
     			Vehicle v = best_trajectory[1];
     			newsf = v.s;
-    			newvf = v.v;//ref_vel*MPHTOMS; //v.v;
+    			newvf.speedUpdate(v.v);//ref_vel*MPHTOMS; //v.v;
     			newaf = v.a;
-    		//	newlane = v.lane;
     			lane = v.lane;
     			newdf = (lane-1)*4+2;
 
           	} else { // this shouldn't occur in theory ... in the worst case it should return a keep lane trajectory
 				newsf = car_s+60;
-				newvf = 1.5; //car_speed/2.24;
+				newvf.speedUpdate(3.5); //car_speed/2.24;
+				newvf.speedUpdate(3.5);
 				newaf = 5;
 				newdf = car_d;
-				cout<<"no best trajectory"<<endl;
-			    interval =(newsf - car_s)/((19.0+(car_speed/2.24))/2);
-				cout << "interval " << interval << " new speed " << newvf << endl;
 
           	}
 
@@ -359,7 +345,6 @@ int main() {
 
 			vector<double> ptsx;
 			vector<double> ptsy;
-
 			// Reference x, y, yaw states
 			double ref_x = car_x;
 			double ref_y = car_y;
@@ -442,7 +427,7 @@ int main() {
 
 			// Fill up the rest of the path planner to always output 50 points
 			for (int i = 1; i <= WAYPOINTSSIZE - previous_path_x.size(); i++) {
-				double N = (target_dist/(WAYPOINTQUANT*newvf));
+				double N = (target_dist/(WAYPOINTQUANT*newvf.v));
 				double x_point = x_add_on + (target_x) / N;
 				double y_point = s(x_point);
 
