@@ -192,14 +192,14 @@ vector<string> Vehicle::successor_states() {
             states.push_back("PLCL");
             states.push_back("LCL");
         } else {
-			states.push_back("PLCR");
+		states.push_back("PLCR");
         }
     } else if (state.compare("PLCR") == 0) {
         if (lane != 2) {
             states.push_back("PLCR");
             states.push_back("LCR");
         } else {
-            states.push_back("PLCL");
+            	states.push_back("PLCL");
         }
     }
 #if DEBUG

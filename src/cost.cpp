@@ -18,7 +18,7 @@ float goal_distance_cost(const Vehicle & vehicle, const vector<Vehicle> & trajec
 	cout <<  "\t\t>DISTANCE COST" << endl;
 #endif
     float cost;
-    float distance = 1000; //data["distance_to_goal"];
+    float distance = 100; //data["distance_to_goal"];
     if (distance > 0) {
         cost = 1 - 2*exp(-(abs(2.0- data["intended_lane"] - data["final_lane"]) / distance));
     } else {
@@ -194,7 +194,7 @@ float nearest_approach(const Vehicle& ego, const vector<Vehicle>& trajectory, co
     float new_d = trajectory[1].d;
     int collision_idx= TRAJECTORYSTEPS;
     int steps =  TRAJECTORYSTEPS;
-    float delta_s = (new_s-ego.s-15)/steps;
+    float delta_s = (new_s-ego.s)/steps;
     float delta_d = (new_d-ego.d)/steps;
 #if DEBUG
     cout << "\t\t\t\t\tdist ";
