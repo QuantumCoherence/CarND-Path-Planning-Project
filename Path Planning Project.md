@@ -1,4 +1,4 @@
-﻿# Path Planning Project
+# Path Planning Project
 ## GitHub Repo
 [CarND-Path-Planning-Project](https://github.com/QuantumCoherence/CarND-Path-Planning-Project)
 
@@ -9,7 +9,7 @@ The build sub-folder contains all the binaries and the makefile for compiling th
 
 **Compiling on your system: CMakelists.txt**
 
-Use the CMakeLists.txt in the repo root folder to create the make file and compile on your system.
+Use the CMakeLists.txt in the repo root folder to create the make file and compile on your system.See the README file.
 
 
 ## Path Planning Project Notes
@@ -45,16 +45,16 @@ The trajectory estimation is calculated by measuring the actual time elapsed bet
 
 ### Cost Functions
 
-Each trajectory at each simulation loop will be associate with an estimated cost (nominally every 0.02 seconds).
+Each trajectory at each simulation loop will be associated with an estimated cost (nominally every 0.02 seconds).
 The cost is the sum of all cost functions, that are being calculated to minimize the impact of various aspect of the traffic.
 
 The current implementation estimate the following costs:
 - Distance to Goal Cost
-	This cost penalizses trajectory with longer distance
+	This cost penalizes trajectories with longer distance
 - Collision Cost
 	This cost penalizes trajectories that would collide with other vehicles
 - Inefficiency Cost
-	This cost penalizes trajectories that are slower, in prticular this cost tend to favor a lane with faster traffic over one that has lower traffic.
+	This cost penalizes trajectories that are slower, in prticular this cost tend to favor a lane with faster traffic over one that has lower traffic, even if closer to the furthest vehicle on any lane.
 
 ### Driving State FSM
 
@@ -80,119 +80,57 @@ PLCL LCL, or
 PLCR, LCR
 
 This FSM is very simple and does not observe lane transisitons beyond one single lane. 
-This can lead to the ego potentially getting stuck on one side of the freeway, behind a slow vehicle, if another slow vehicle occupies the middle lane close to the ego vehicle, inspite of an open lane avaibale on the other side of the freeway.
-Typically the ego comes along the middle lane. If a vehicle is present in the middle lane, ego will change to another lane following this priorities: 
+This can lead to the ego potentially getting stuck on one side of the freeway, behind a slow vehicle, if another slow vehicle occupies the middle lane close to the ego vehicle, inspite of an open lane available on the other side of the freeway.
+Typically the ego comes along the middle lane. If a vehicle is present in the middle lane, ego will change to another lane following these priorities: 
 1. Empty Lane
 2. If all lane are occupied, faster lane first
 
-At this point, without the double PLC* transistion, the ego would remain behind the vehicle on the side lane, until the middle lane was to become free, regardless of what happened to the opposite side. The added transition enable the ego to slowdown and transition two lanes off and take advnatage of an open lane that was otherwise no longer accessible.
+At this point, without the double PLC* transistion, the ego would remain behind the vehicle on the side lane, until the middle lane was to become free, regardless of what happened to the opposite side lane. The added transition enables the ego to transition two lanes off and take advantage of an open lane that was otherwise no longer accessible. It howevr requires the ego to back off enough for it to be able to transition. This is why the ego will  slow down slightly more than the ahead vehicle, therefore increasing so slighlty the distance to the next vehicle over time. This will create the opportunity to transittion to the other side in one single pass, even though technically is two transition in rapid succession. This will take place only if the other lane is empty.
+	
+This approach is however not very robust when vehicles are traveling nearly at the same speed in all three lanes. In such case the ego would tend to transition back and forth trying to keep up with the fastest lane. Being the vehicles driving at virtually the same speed, this is is likley to cause repeated changes of lane that would bring the ego no further than w/o lane changes.
 
+A more robust approach is to extend the FSM and cost function so to handle efficiently more complex traffic cases.
 
 **Vides**
-Download the videoscreen capture of an entire loop around the track in ziped form, gunzip and play.
-This is the outcome using following paramters 
 
-```
-Kp  0.061751
-Ki  0.004
-Kd  -0.662543
-Max_Speed 35
-```
-These are set by default, so just type 
-``./pid ``
-
-[PID Loop Video Download from here](https://github.com/QuantumCoherence/CarND-PID-Control-Project/blob/master/vokoscreen-2018-06-01_21-37-30.mkv.gz)
+[Path Planning Video](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vokoscreen-2018-10-22_03-09-30.mkv)
 
 **Images**
-The following images show two outoput screen captures of the Tweedle state machine process (see under Parameters Tuning and Coding Notes for details).
-The word "Reset" at the beginning of the line indicates that the car left the paved road and so the error estiamtion process was stopped, the simulator reset and the next step of the Tweedle algorhitmn processed.
-The word "Loop" instead indicates that the whole track was completed.
-Each time a new lowest error was found, the best_error was updated and the next step of the Tweedle algorithm processed. In the end the progress is visible, even though very slow, given one loop requires aproximatley 600 simulation steps.
+The following images show some outoput screen captures from a successful run. 
+Notice how the Ego vehicle "decided" to wait behind a specific traffic vehicle despite it appearing to be the furthest back of the three vehicle impeding a full speed run. As it turns out, the selected lane is the fastest one, which will lead to the fastest resolution of the bottle neck. By using a combination of cost functions and driving state transtion logi, the ego vehicle achieves the shortest path in time through a traffic jam and can then resume its normal full speed course soon after the way is free of slower traffic.
 
-The images below show just a subset of the whole process.
-
-
+| ![Heading Into Traffic Jam](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h36m29s016.png?raw=true) | 
+|:--:| 
+| **Heading Into Traffic Jam** |
 
 
-![Tweedle Process Output sample 1](https://github.com/QuantumCoherence/CarND-PID-Control-Project/blob/master/Tweedle%20Output.jpg?raw=true)
+| ![Best Lane it's behind this vehicle on the left](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h37m03s275.png?raw=true) | 
+|:--:| 
+| **Best Lane it's behind this vehicle on the left** |
 
+| ![Keep Distance](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h37m14s133.png?raw=true) | 
+|:--:| 
+| **Keep Distance** |
 
-![Tweedle Process Output sample 2](https://github.com/QuantumCoherence/CarND-PID-Control-Project/blob/master/Tweedle%20Output2.jpg?raw=true)
+| ![Slowly following through traffic jam](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h37m49s652.png?raw=true) | 
+|:--:| 
+| **Slowly following through traffic jam** |
 
-### Speed and Paramter Tuning
-A fully functional Tweedle state machine was implemented that can perform the tweedle algorithm to estimate the optimal PID paramter values. The state machine automatically resets the simulator, whenever the vehicle goes off the paved road or simply hits the top of the curb on either side of the track.
+| ![STeadyg](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h38m00s584.png?raw=true) | 
+|:--:|
+| **Steady as it goes** |
 
-The optional input "-tweedle" to the "pid" binary, will start the tuning process with the starting values 0.1, 0.1 , 0.1 resp. for P, I and D. However, this process is exceedingly long, because at the outstart most parameter values combianiton will lead to crashes and many resets are necessary to move forward with the estimation.
+| ![Almost Through](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h38m15s054.png?raw=true) | 
+|:--:| 
+| **Almost Through** |
 
-With a bit of heuristic, trial and error it is however possible to find a rough guess numerically quite close to a good starting point for all the parameters, such that the vehicle will remain on the track most of the time and the algorithm will find an optimal configuration in a much shorter number of iterations.
+| ![Clearing Traffic on Fastest Path](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h38m28s479.png?raw=true) | 
+|:--:| 
+| **Clearing Traffic on Fastest Path** |
 
-The manual process is quite simple:
-
-```
-1. Keep the speed low (see below)
-2. Set I and D to zero and make a guess for P
-2. If the car flies of the track, reduce P until the car tends to remain on the track on straight or slightly turning trajectory.
-3. Add a negative value to D such that the vehicle can now stay on the track even for higher P values, that is for tighter turns, all while achieving some level of stability
-4. Once the car remains on the track indefinitely, even if with visible instability, pass the guesstimated parameters as starting to point to the the "pid" binary using the -tweedle option on.
-```
-
-
-Using these paramters the Tweedle state machine can then relativley quickly find optimal P, I and D paramter values, in aproximately several 100s steps. Yes, it remains quite long even after a rough intial manual estiamtion, but comperatively much much shorter,than without using manually estimated initial values.
-The images above show a sample of the process output while it was seeking the best optimal PID param setting.
-
-The sample show a starting PID setting that was estimated manually:
-P = 0.19
-I = 0
-D = -0.8
-
-The final values (not shown in the images) that were then coded as default settings for the compliled binary, were:
-
-```
-Kp  0.061751
-Ki  0.004
-Kd  -0.662543
-Max_Speed 35
-```
-
-*Estimation and control of the speed*
-
-To control the speed and emulate a car driver behavior of breaking to slow down and avoid driving off the track as much as possible, a simple throttle algorithm was used that can be summarized as following:
-
-throttle = (0.7-fabs(cte -prev_cte))*fabs(1-(speed/max_speed));
-
-What this means is the follwing: 
-
-1. when the ratio between speed and the predefined max_speed value, is close to one, the throttle is set to zero.
-2. when the rate of increase of the cte error is bigger than 0.7, the car slows down.
-3. When the car slows down, the cte error rate goes to zero, hence accleration is the applied normally.
-
-
-
-
-### Coding and usage Notes
-No throttle PID was implemented as a simple algorithm was sufficient to control the speed effectively.
-A Tweedle State Machine was coded in the pid class, that fully implements the whole tweedle algorithm.
-The pid binary accepts following optional parameters
-
-``./pid -tweedle" `` 
-
-triggeres the tweedle process with starting values 0.1, 0.1, 0.1, It stops when tol < 0.00001
-
-``./pid -tweedle -sp <float> -si <float> -sd <float> -mv <float>`` 
-
-start the pid controller with the specified p, i, d and max_speed -mv value
-
-``./pid ``
-
-triggers the pid controller with default parameters value as described above 
-
-
-Comments in the code should be self explanatory . 
-
-Please note despite the Tweedle algorithm being simple, the state machine implementing it instead isn't. As the algorithm gets spread out among states, reading and following the tweedle logic in the code, becomes counterintuitive. To make things more complicated,this particular state machine was implemented using transtional logic rather than topology only as state transition criteria. This makes the number of used states smaller at the expanse of code readability.  
-The reason a state machine was used is because of the need to transfer control between the tweedle algorithm logic and the simulator. State transition logic is a natural representaton of such problems and has the advantage of retaining the latest state even when the connection with the simulator was to be lost half way during the parameters estimation process.   
-Being able to restart the process without problems is a signficant advantge and therefore the state machine was implemented. 
-As the tweedle state machine code is however outside the scope of the project, no detailed comments or documentation are made available.
+| ![Back To Full Speed](https://github.com/QuantumCoherence/CarND-Path-Planning-Project/blob/master/vlcsnap-2018-10-23-22h38m59s983.png?raw=true) | 
+|:--:| 
+| **Back to full Speed** |
 
 
 
